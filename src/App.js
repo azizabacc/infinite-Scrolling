@@ -13,6 +13,7 @@ export default function App() {
   } = useBookSearch(query, pageNumber)
 
   const observer = useRef()
+  console.log(observer);
   const lastBookElementRef = useCallback(node => {
     if (loading) return
     if (observer.current) observer.current.disconnect()
@@ -34,12 +35,12 @@ export default function App() {
       <input type="text" value={query} onChange={handleSearch}></input>
       {books.map((book, index) => {
         if (books.length === index + 1) {
-          return <div ref={lastBookElementRef} key={book}>{book}</div>
+          return <div className='booktitle' ref={lastBookElementRef} key={book}>{book}</div>
         } else {
-          return <div key={book}>{book}</div>
+          return <div  className='booktitle' key={book}>{book}</div>
         }
       })}
-      <div>{loading && 'Loading...'}</div>
+      <div id='loading'>{loading && 'Loading...'}</div>
       <div>{error && 'Error'}</div>
     </>
   )
